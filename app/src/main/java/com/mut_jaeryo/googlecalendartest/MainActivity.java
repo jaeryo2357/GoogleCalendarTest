@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
      * Google Calendar API에 접근하기 위해 사용되는 구글 캘린더 API 서비스 객체
      */
 
+
     private com.google.api.services.calendar.Calendar mService = null;
 
     /**
      * Google Calendar API 호출 관련 메커니즘 및 AsyncTask을 재사용하기 위해 사용
      */
     private  int mID = 0;
-
 
     GoogleAccountCredential mCredential;
     private TextView mStatusText;
@@ -158,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 getApplicationContext(),
                 Arrays.asList(SCOPES)
         ).setBackOff(new ExponentialBackOff()); // I/O 예외 상황을 대비해서 백오프 정책 사용
-
     }
 
 
@@ -174,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
      *
      * 하나라도 만족하지 않으면 해당 사항을 사용자에게 알림.
      */
-    private String getResultsFromApi() {
+    private void getResultsFromApi() {
 
         if (!isGooglePlayServicesAvailable()) { // Google Play Services를 사용할 수 없는 경우
 
@@ -190,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             // Google Calendar API 호출
             new MakeRequestTask(this, mCredential).execute();
         }
-        return null;
     }
 
 
@@ -527,7 +525,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 eventStrings.add(String.format("%s \n (%s)", event.getSummary(), start));
             }
 
-
             return eventStrings.size() + "개의 데이터를 가져왔습니다.";
         }
 
@@ -626,14 +623,14 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     .setDescription("캘린더에 이벤트 추가하는 것을 테스트합니다.");
 
 
-            java.util.Calendar calander;
+            java.util.Calendar calender;
 
-            calander = java.util.Calendar.getInstance();
+            calender = java.util.Calendar.getInstance();
             SimpleDateFormat simpledateformat;
             //simpledateformat = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ", Locale.KOREA);
             // Z에 대응하여 +0900이 입력되어 문제 생겨 수작업으로 입력
             simpledateformat = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss+09:00", Locale.KOREA);
-            String datetime = simpledateformat.format(calander.getTime());
+            String datetime = simpledateformat.format(calender.getTime());
 
             DateTime startDateTime = new DateTime(datetime);
             EventDateTime start = new EventDateTime()
